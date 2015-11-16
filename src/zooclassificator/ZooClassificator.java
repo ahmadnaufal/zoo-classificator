@@ -38,12 +38,34 @@ public class ZooClassificator {
             
             sc.close();
             
+            // set the number of rows and the attributes
             numRows = data.size();
             numAttributes = data.get(0).size();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ZooClassificator.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    /**
+     * @return the data
+     */
+    public List<List<String> > getData() {
+        return data;
+    }
+
+    /**
+     * @return the numRows
+     */
+    public int getNumRows() {
+        return numRows;
+    }
+
+    /**
+     * @return the numAttributes
+     */
+    public int getNumAttributes() {
+        return numAttributes;
     }
     
     

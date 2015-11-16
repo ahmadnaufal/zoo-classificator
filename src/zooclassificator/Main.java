@@ -5,14 +5,9 @@
  */
 package zooclassificator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
+ * Main app class for zoo classificator
  * @author Ahmad Naufal Farhan
  */
 public class Main {
@@ -20,6 +15,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ZooClassificator zc = new ZooClassificator("zoo.class");
+        ZooClassificator zc = new ZooClassificator("D:/zoo.data.txt");
+        
+        System.out.println(zc.getData());
+        System.out.println(zc.getNumAttributes());
+        System.out.println(zc.getNumRows());
     }
 }
