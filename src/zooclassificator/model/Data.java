@@ -8,34 +8,19 @@ package zooclassificator.model;
 import java.util.ArrayList;
 
 public class Data {
-    ArrayList<Attribute> L ; 
+    ArrayList<String> Attrs = new ArrayList<>();
 
-    public Data() {
-        L = new ArrayList<>()   ;  
-    }
-
-    public Data(ArrayList<Attribute> L) {
-        this.L = L;
-    }
-
-    public void setL(ArrayList<Attribute> L) {
-        this.L = L;
-    }   
-
-    public ArrayList<Attribute> getL() {
-        return L;
+    public Data(ArrayList<String> Atrrs) {
+        this.Attrs = Atrrs;
     }
     
-    public void addAttr(Attribute a) {
-        L.add(a);
+    public ArrayList<String> getAttrs() {
+        return Attrs;
+    } 
+
+    @Override
+    public String toString() {
+        return "Data{" + "Attrs=" + Attrs + '}';
     }
     
-    public Attribute getAttr(int i) {
-        return L.get(i);
-    }
-    
-    public void delAttr(int i) {
-        //delete L with first elemt is 0
-        L.remove(L.get(i));
-    }
 }

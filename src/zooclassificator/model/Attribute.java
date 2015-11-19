@@ -1,14 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zooclassificator.model;
 
-/**
- *
- * @author adek
- */
+import java.util.ArrayList;
 public class Attribute {
+    String name;
+    ArrayList<String> elmts;
+    public Attribute(String name, ArrayList<String> elmts) {
+        this.name = name;
+        this.elmts = elmts;
+    }
+
+    @Override
+    public String toString() {
+        return "Attribute{" + "name=" + name + ", elmts=" + elmts + '}';
+    }
     
 }
