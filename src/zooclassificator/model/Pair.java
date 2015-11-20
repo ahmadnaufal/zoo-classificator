@@ -3,30 +3,26 @@
  */
 package zooclassificator.model;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import zooclassificator.model.*;
 
 public class Pair {
-    ArrayList<Data> Data;
+    ArrayList<Data> AttrLib;
     ArrayList<Data> DataSet;
 
-    public Pair(ArrayList<Data> Data, ArrayList<Data> DataSet) {
-        this.Data = Data;
+    public Pair(ArrayList<Data> AttrLib, ArrayList<Data> DataSet) {
+        this.AttrLib = AttrLib;
         this.DataSet = DataSet;
-    }
+    }   
 
-    public ArrayList<Data> getData() {
-        return Data;
-    }
+    public ArrayList<Data> getAttrLib() {
+        return AttrLib;
+    }    
 
     public ArrayList<Data> getDataSet() {
         return DataSet;
@@ -44,6 +40,7 @@ public class Pair {
         Data data = new Data(name,elmts);
         return data;
     }
+    
     static public Pair readDataSet(String url) throws FileNotFoundException, IOException {
     //Mengambil Data Collection dan Data Collection dengan regex
         String line; Pattern ptr; Matcher mtc;
@@ -68,7 +65,8 @@ public class Pair {
                     while(mtc.find())
                         L.add(mtc.group());
                     id += 1;
-                    Data dt = new Data(L);
+                    String sid = "data" + id;
+                    Data dt = new Data(sid,L);
                     DataSet.add(dt);
                 }
             }	
