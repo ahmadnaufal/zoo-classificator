@@ -12,13 +12,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Pair {
-    ArrayList<Data> AttrLib;    // the attribute name and the values allowed
-    ArrayList<Data> DataSet;    // the attribute for each data set
+    ArrayList<Data> AttrLib;
+    ArrayList<Data> DataSet;
 
     public Pair(ArrayList<Data> AttrLib, ArrayList<Data> DataSet) {
         this.AttrLib = AttrLib;
         this.DataSet = DataSet;
     }   
+    
+    public Pair(Pair p){
+        this.AttrLib = (ArrayList)p.getAttrLib().clone();
+        this.DataSet = (ArrayList)p.getDataSet().clone();
+    }
 
     public ArrayList<Data> getAttrLib() {
         return AttrLib;
@@ -46,7 +51,7 @@ public class Pair {
         String line; Pattern ptr; Matcher mtc;
         ArrayList<Data> AttrLib = new ArrayList<>(); 
         ArrayList<Data> DataSet = new ArrayList<>();
-        boolean attrFlag = true;
+        boolean attrFlag = true; 
         int id=0;
         try (BufferedReader br = new BufferedReader(new FileReader(url))) {
             while((line = br.readLine()) != null) {
