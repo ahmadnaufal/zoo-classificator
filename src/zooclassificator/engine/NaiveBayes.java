@@ -3,11 +3,18 @@ package zooclassificator.engine;
 import java.util.ArrayList;
 import zooclassificator.model.*;
 
+/**
+ * 
+ * 
+ * @author Wiwit Rifa'i
+ */
+
 public class NaiveBayes {
 	int nAttr, nAll;
 	private ArrayList< ArrayList< Integer > > countTable[];
 	private ArrayList< Integer >[] sumTable;
 	private ArrayList <String>[] domainAttr;
+	private String[] nameAttr;
 	public NaiveBayes() {
 		reset();
 	}
@@ -26,12 +33,14 @@ public class NaiveBayes {
 		nAttr = attribut.size();
 		nAll = 0;
 		domainAttr = new ArrayList[nAttr];
+		nameAttr = new String[nAttr];
 		for(int i = 0; i<nAttr; i++) {
 			ArrayList<String> temp = attribut.get(i).getAttributes();
 			domainAttr[i] = new ArrayList<>();
 			for(String s : temp) {
 				domainAttr[i].add(s);
 			}
+			nameAttr[i] = new String(attribut.get(i).getName());
 		}
 		
 		// Inisialisasi tabel count dan tabel sum
@@ -99,6 +108,7 @@ public class NaiveBayes {
 		reset();
 		init(dataset);
 		count(dataset, +1);
+		printModel();
 		int correct = 0;
 		for(int i = 0; i<dataTable.size(); i++) {
 			String result = test(dataTable.get(i));
@@ -106,15 +116,18 @@ public class NaiveBayes {
 				correct++;
 			}
 		}
-		System.out.println("Correct Answer : " + correct);
-		System.out.println("Wrong Answer : " + (dataTable.size()-correct));
-		System.out.println("Accuracy : " + (correct*100.0/dataTable.size()));
+		System.out.println("--- Full Training Set ---\n");
+		System.out.println("Correct Answer\t: " + correct);
+		System.out.println("Wrong Answer  \t: " + (dataTable.size()-correct));
+		System.out.println("Total         \t: " + dataTable.size());
+		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size())+" %");
 	}
 	public void ten_fold(Pair dataset) {
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
 		init(dataset);
 		count(dataset, +1);
+		printModel();
 		int sizeGroup = (dataTable.size()+9)/10;
 		int offset = 0;
 		int correct = 0;  
@@ -136,8 +149,28 @@ public class NaiveBayes {
 			count(datatest, +1);
 			offset += sizeGroup;
 		}
-		System.out.println("Correct Answer : " + correct);
-		System.out.println("Wrong Answer : " + (dataTable.size()-correct));
-		System.out.println("Accuracy : " + (correct*100.0/dataTable.size()));
+		System.out.println("--- Cross Validation 10-fold ---\n");
+		System.out.println("Correct Answer\t: " + correct);
+		System.out.println("Wrong Answer  \t: " + (dataTable.size()-correct));
+		System.out.println("Total         \t: " + dataTable.size());
+		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size()) + " %");
+	}
+	public void printModel() {
+		System.out.println("--- Classifier Model (Full Training Set) ---\n");
+		for(int i = 0; i < nAttr-1; i++) {
+			System.out.println(nameAttr[i] + " :");
+			for(int j = 0; j < domainAttr[i].size(); j++) {
+				System.out.print(" " + domainAttr[i].get(j)+ "\t= ");
+				for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
+					System.out.print(domainAttr[nAttr-1].get(k) + "(" + countTable[i].get(j).get(k) + ")\t");
+				}
+				System.out.println("");
+			}
+			System.out.print(" TOTAL\t= ");
+			for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
+				System.out.print(domainAttr[nAttr-1].get(k) + "(" + sumTable[i].get(k) + ")\t");
+			}
+			System.out.println("\n");
+		}
 	}
 }
