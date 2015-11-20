@@ -14,8 +14,8 @@ public class Main {
             ArrayList<Data> AttrLib = P.getAttrLib();
             ArrayList<Data> DataSet = P.getDataSet();
             //CHECK IT OUT!!
-            System.out.println(AttrLib.get(2).toString());
-            System.out.println(DataSet.get(2).getAttributes().size());
+            System.out.println(AttrLib.get(3).toString());
+            System.out.println(DataSet.get(3).getAttributes().size());
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

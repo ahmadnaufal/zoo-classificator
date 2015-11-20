@@ -30,7 +30,7 @@ public class Pair {
     
     static public Data makeAttr(String codex) {
     //Mengambil elemen nama dan anggota attribute dengan regex
-        Pattern ptr = Pattern.compile("([a-z])\\w+");
+        Pattern ptr = Pattern.compile("\\w+");
         Matcher mtc = ptr.matcher(codex);
         ArrayList<String> elmts = new ArrayList<>(); 
         mtc.find(); mtc.find();
