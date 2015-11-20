@@ -4,21 +4,76 @@
 package zooclassificator.model;
 
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import zooclassificator.model.*;
+
 public class Pair {
-    ArrayList<Attribute> Attrs;
+    ArrayList<Data> Data;
     ArrayList<Data> DataSet;
 
-    public Pair(ArrayList<Attribute> Attrs, ArrayList<Data> DataSet) {
-        this.Attrs = Attrs;
+    public Pair(ArrayList<Data> Data, ArrayList<Data> DataSet) {
+        this.Data = Data;
         this.DataSet = DataSet;
     }
 
-    public ArrayList<Attribute> getAttrs() {
-        return Attrs;
+    public ArrayList<Data> getData() {
+        return Data;
     }
 
     public ArrayList<Data> getDataSet() {
         return DataSet;
     }
+    
+    static public Data makeAttr(String codex) {
+    //Mengambil elemen nama dan anggota attribute dengan regex
+        Pattern ptr = Pattern.compile("([a-z])\\w+");
+        Matcher mtc = ptr.matcher(codex);
+        ArrayList<String> elmts = new ArrayList<>(); 
+        mtc.find(); mtc.find();
+        String name = mtc.group();
+        while(mtc.find())
+            elmts.add(mtc.group());
+        Data data = new Data(name,elmts);
+        return data;
+    }
+    static public Pair readDataSet(String url) throws FileNotFoundException, IOException {
+    //Mengambil Data Collection dan Data Collection dengan regex
+        String line; Pattern ptr; Matcher mtc;
+        ArrayList<Data> AttrLib = new ArrayList<>(); 
+        ArrayList<Data> DataSet = new ArrayList<>();
+        boolean attrFlag = true; 
+        int id=0;
+        try (BufferedReader br = new BufferedReader(new FileReader(url))) {
+            while((line = br.readLine()) != null) {
+                if(line.equals("@data")) 
+                    attrFlag = false;
+                else if(attrFlag) {
+                    ptr = Pattern.compile("@attr");
+                    mtc = ptr.matcher(line);
+                    if(mtc.find())
+                        AttrLib.add(makeAttr(line));
+                } else {
+                    ptr = Pattern.compile("([a-z])\\w+");
+                    mtc = ptr.matcher(line);
+                    String find = "";
+                    ArrayList<String> L = new ArrayList<>();
+                    while(mtc.find())
+                        L.add(mtc.group());
+                    id += 1;
+                    Data dt = new Data(L);
+                    DataSet.add(dt);
+                }
+            }	
+	   }
+        return new Pair(AttrLib,DataSet);
+    } 
     
 }

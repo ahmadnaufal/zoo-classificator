@@ -8,19 +8,20 @@ package zooclassificator.model;
 import java.util.ArrayList;
 
 public class Data {
-    ArrayList<String> Attrs = new ArrayList<>();
-
-    public Data(ArrayList<String> Atrrs) {
-        this.Attrs = Atrrs;
-    }
+    String name;
+    ArrayList<String> attributes;
     
-    public ArrayList<String> getAttrs() {
-        return Attrs;
-    } 
+    public Data(ArrayList<String> attributes) {
+        this.attributes = attributes;
+    }
+    public Data(String name, ArrayList<String> attributes) {
+        this.name = name;
+        this.attributes = attributes;
+    }
 
     @Override
     public String toString() {
-        return "Data{" + "Attrs=" + Attrs + '}';
+        return "Data{" + "name=" + name + ", elmts=" + attributes + '}';
     }
     
 }
