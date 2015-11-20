@@ -68,7 +68,7 @@ public class NaiveBayes {
 				continue;
 			for(int j = 0; j<nAttr; j++) {
 				int id = domainAttr[j].indexOf(dataValue.get(j));
-				if(id < -1) {
+				if(id < 0) {
 					id = domainAttr[j].size();
 					domainAttr[j].add(dataValue.get(j));
 					countTable[j].add(new ArrayList());
@@ -128,12 +128,16 @@ public class NaiveBayes {
 		init(dataset);
 		count(dataset, +1);
 		printModel();
-		int sizeGroup = (dataTable.size()+9)/10;
+		int sizeMin = dataTable.size()/10, mod = dataTable.size() % 10;
 		int offset = 0;
 		int correct = 0;  
 		for(int i = 0; i<10; i++) {
 			ArrayList datas = new ArrayList();
-			int to = offset+sizeGroup;
+			int to = offset+sizeMin;
+			if(mod > 0) {
+				to++;
+				mod--;
+			}
 			if(to > dataTable.size())
 				to = dataTable.size();
 			for(int j = offset; j< to; j++) {
@@ -147,7 +151,7 @@ public class NaiveBayes {
 					correct++;
 			}
 			count(datatest, +1);
-			offset += sizeGroup;
+			offset = to;
 		}
 		System.out.println("--- Cross Validation 10-fold ---\n");
 		System.out.println("Correct Answer\t: " + correct);
