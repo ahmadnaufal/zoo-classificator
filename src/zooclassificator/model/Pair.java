@@ -58,7 +58,7 @@ public class Pair {
                     if(mtc.find())
                         AttrLib.add(makeAttr(line));
                 } else {
-                    ptr = Pattern.compile("([a-z])\\w+");
+                    ptr = Pattern.compile("\\w+");
                     mtc = ptr.matcher(line);
                     String find = "";
                     ArrayList<String> L = new ArrayList<>();
