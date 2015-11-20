@@ -19,7 +19,7 @@ public class NaiveBayes {
 		domainAttr = null;
 	}
 	
-	public void Init(Pair dataset) {
+	public void init(Pair dataset) {
 		ArrayList< Data > attribut  = dataset.getAttrLib();
 		ArrayList< String > classAttr = attribut.get(attribut.size()-1).getAttributes();
 		// Initailize domain Attribut
@@ -50,7 +50,7 @@ public class NaiveBayes {
 		}
 	}
 	
-	void count(Pair dataset, int change) {
+	public void count(Pair dataset, int change) {
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		for(int i = 0; i<dataTable.size(); i++) {
 			ArrayList< String > dataValue = dataTable.get(i).getAttributes();
@@ -74,7 +74,7 @@ public class NaiveBayes {
 			nAll += change;
 		}
 	}
-	String test(Data data) {
+	public String test(Data data) {
 		ArrayList< String > values = data.getAttributes();
 		double high = 0;
 		int id = 0;
@@ -93,5 +93,51 @@ public class NaiveBayes {
 			}
 		}
 		return domainAttr[nAttr-1].get(id);
+	}
+	public void fulltraining(Pair dataset) {
+		ArrayList< Data > dataTable = dataset.getDataSet();
+		reset();
+		init(dataset);
+		count(dataset, +1);
+		int correct = 0;
+		for(int i = 0; i<dataTable.size(); i++) {
+			String result = test(dataTable.get(i));
+			if(result.equals(dataTable.get(i).getAttributes().get(nAttr-1))) {
+				correct++;
+			}
+		}
+		System.out.println("Correct Answer : " + correct);
+		System.out.println("Wrong Answer : " + (dataTable.size()-correct));
+		System.out.println("Accuracy : " + (correct*100.0/dataTable.size()));
+	}
+	public void ten_fold(Pair dataset) {
+		ArrayList< Data > dataTable = dataset.getDataSet();
+		reset();
+		init(dataset);
+		count(dataset, +1);
+		int sizeGroup = (dataTable.size()+9)/10;
+		int offset = 0;
+		int correct = 0;  
+		for(int i = 0; i<10; i++) {
+			ArrayList datas = new ArrayList();
+			int to = offset+sizeGroup;
+			if(to > dataTable.size())
+				to = dataTable.size();
+			for(int j = offset; j< to; j++) {
+				datas.add(dataTable.get(j));
+			}
+			Pair datatest = new Pair(dataset.getAttrLib(), datas);
+			count(datatest, -1);
+			for(int j = offset; j<to; j++) {
+				String result = test(dataTable.get(j));
+				if(result.equals(dataTable.get(i).getAttributes().get(nAttr-1)))
+					correct++;
+			}
+			count(datatest, +1);
+			offset += sizeGroup;
+		}
+		System.out.println("Correct Answer : " + correct);
+		System.out.println("Wrong Answer : " + (dataTable.size()-correct));
+		System.out.println("Accuracy : " + (correct*100.0/dataTable.size()));
 	}
 }
