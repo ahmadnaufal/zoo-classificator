@@ -1,4 +1,4 @@
-@relation weather.symbolic
+@relation zoo.symbolic
 
 @attribute outlook {sunny, overcast, rainy}
 @attribute temperature {hot, mild, cool}

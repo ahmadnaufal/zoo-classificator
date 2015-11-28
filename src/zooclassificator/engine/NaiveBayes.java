@@ -83,6 +83,7 @@ public class NaiveBayes {
 			nAll += change;
 		}
 	}
+        
 	public String test(Data data) {
 		ArrayList< String > values = data.getAttributes();
 		double high = 0;
@@ -103,6 +104,7 @@ public class NaiveBayes {
 		}
 		return domainAttr[nAttr-1].get(id);
 	}
+        
 	public void fulltraining(Pair dataset) {
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
@@ -122,6 +124,7 @@ public class NaiveBayes {
 		System.out.println("Total         \t: " + dataTable.size());
 		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size())+" %");
 	}
+        
 	public void ten_fold(Pair dataset) {
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
@@ -159,6 +162,7 @@ public class NaiveBayes {
 		System.out.println("Total         \t: " + dataTable.size());
 		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size()) + " %");
 	}
+        
 	public void printModel() {
 		System.out.println("--- Classifier Model (Full Training Set) ---\n");
 		for(int i = 0; i < nAttr-1; i++) {
