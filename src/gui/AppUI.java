@@ -10,6 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.DefaultEditorKit;
+import zooclassificator.engine.KNearest;
+import zooclassificator.engine.NaiveBayes;
+import zooclassificator.model.Pair;
 
 /**
  *
@@ -36,7 +40,8 @@ public class AppUI extends javax.swing.JFrame {
     private void initComponents() {
 
         dataFileChooser = new javax.swing.JFileChooser();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroupAlgorithm = new javax.swing.ButtonGroup();
+        buttonGroupTrain = new javax.swing.ButtonGroup();
         textFilePath = new javax.swing.JTextField();
         buttonSubmit = new javax.swing.JButton();
         buttonBrowse = new javax.swing.JButton();
@@ -50,6 +55,12 @@ public class AppUI extends javax.swing.JFrame {
         textResult = new javax.swing.JTextField();
 
         dataFileChooser.setDialogTitle("Select a Dataset");
+
+        buttonGroupAlgorithm.add(radioAlgorithm1);
+        buttonGroupAlgorithm.add(radioAlgorithm2);
+
+        buttonGroupTrain.add(radioTrain1);
+        buttonGroupTrain.add(radioTrain2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +87,14 @@ public class AppUI extends javax.swing.JFrame {
         });
 
         radioAlgorithm2.setText("Naive-Bayes");
+        radioAlgorithm2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioAlgorithm2ActionPerformed(evt);
+            }
+        });
 
         radioAlgorithm1.setText("k-Nearest Neighbor (kNN)");
+        radioAlgorithm1.setSelected(true);
         radioAlgorithm1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioAlgorithm1ActionPerformed(evt);
@@ -85,10 +102,11 @@ public class AppUI extends javax.swing.JFrame {
         });
 
         radioTrain1.setText("Full Training");
+        radioTrain1.setSelected(true);
 
         radioTrain2.setText("10-fold Cross-Validation");
 
-        textK.setText("k");
+        textK.setText("1");
 
         textResult.setEditable(false);
         textResult.addActionListener(new java.awt.event.ActionListener() {
@@ -161,10 +179,31 @@ public class AppUI extends javax.swing.JFrame {
     private void buttonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubmitActionPerformed
         try {
             // TODO add your handling code here:
-            textResult.read(new FileReader(textFilePath.getText()), null);
+//      textResult.read(new FileReader(file.getAbsolutePath()), null);
+            String text;
+            Pair P = Pair.readDataSet(file.getAbsolutePath());
+            if (radioAlgorithm2.isSelected()) {
+                NaiveBayes nb = new NaiveBayes();
+                if (radioTrain2.isSelected())
+                    text = nb.ten_fold(P);
+                else
+                    text = nb.fulltraining(P);
+            } else if (radioAlgorithm1.isSelected()) {
+                int k = Integer.parseInt(textK.getText());
+                KNearest knn = new KNearest(k);
+                if (radioTrain2.isSelected())
+                    text = knn.tenFold(P);
+                else
+                    text = knn.FullTraining(P);
+            } else {
+                text = "Oops error occurred..";
+            }
+            
+            textResult.setText(text);
         } catch (IOException ex) {
             Logger.getLogger(AppUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }//GEN-LAST:event_buttonSubmitActionPerformed
 
     private void textFilePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFilePathActionPerformed
@@ -187,12 +226,17 @@ public class AppUI extends javax.swing.JFrame {
 
     private void radioAlgorithm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAlgorithm1ActionPerformed
         // TODO add your handling code here:
-        
+        textK.setEditable(true);
     }//GEN-LAST:event_radioAlgorithm1ActionPerformed
 
     private void textResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textResultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textResultActionPerformed
+
+    private void radioAlgorithm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAlgorithm2ActionPerformed
+        // TODO add your handling code here:
+        textK.setEditable(false);
+    }//GEN-LAST:event_radioAlgorithm2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +275,8 @@ public class AppUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBrowse;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroupAlgorithm;
+    private javax.swing.ButtonGroup buttonGroupTrain;
     private javax.swing.JButton buttonSubmit;
     private javax.swing.JFileChooser dataFileChooser;
     private javax.swing.JScrollPane jScrollPane1;

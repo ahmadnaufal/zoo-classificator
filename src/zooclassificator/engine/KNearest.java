@@ -90,7 +90,8 @@ public class KNearest {
         }
         return value;
     }
-    public void FullTraining(Pair datasett){
+    public String FullTraining(Pair datasett){
+        StringBuilder sb = new StringBuilder();
         double rightValue = 0;
         for(int i = 0; i < datasett.getDataSet().size(); i++){
             Pair dataset = datasett;
@@ -100,14 +101,23 @@ public class KNearest {
                 rightValue = rightValue + 1;
             }
         }
-        out.println(rightValue/datasett.getDataSet().size());
+        
+        sb.append("--- Full Training ---\n");
+        sb.append("Correct Answer\t: ").append(rightValue).append("\n");
+	sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
+	sb.append("Total         \t: ").append(datasett.getDataSet().size()).append("\n");
+	sb.append("Accuracy      \t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %").append("\n");
+        
+        return sb.toString();
     }
-    public void tenFold(Pair dataset){
+    public String tenFold(Pair dataset){
+        StringBuilder sb = new StringBuilder();
         double rightValue = 0;
         int dataSize = dataset.getDataSet().size();
         int[] arrTemp = new int[10];
         int retDiv = dataSize/10;
         int retMod = dataSize%10;
+        
         for(int j=0; j<10; j++){
             int plus=0;
             if(retMod > 0){
@@ -116,8 +126,10 @@ public class KNearest {
             }
             arrTemp[j] = retDiv + plus;
         }
+        
         int checker=0;
         int stDel = 0;
+        
         for(int i = 0; i<dataset.getDataSet().size(); i++){
             Pair temp = new Pair(dataset);
             Data data = temp.getDataSet().get(i);
@@ -137,7 +149,14 @@ public class KNearest {
                 rightValue = rightValue + 1;
             }
         }
-        out.println(rightValue/dataset.getDataSet().size());
+        
+        sb.append("--- Cross Validation 10-fold ---\n");
+        sb.append("Correct Answer\t: ").append(rightValue).append("\n");
+	sb.append("Wrong Answer  \t: ").append(dataset.getDataSet().size()-rightValue).append("\n");
+	sb.append("Total         \t: ").append(dataset.getDataSet().size()).append("\n");
+	sb.append("Accuracy      \t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %").append("\n");
+        
+        return sb.toString();
     }
     
 }

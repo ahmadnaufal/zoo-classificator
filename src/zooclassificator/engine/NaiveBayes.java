@@ -105,35 +105,41 @@ public class NaiveBayes {
 		return domainAttr[nAttr-1].get(id);
 	}
         
-	public void fulltraining(Pair dataset) {
+	public String fulltraining(Pair dataset) {
+                StringBuilder sb = new StringBuilder();
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
 		init(dataset);
 		count(dataset, +1);
-		printModel();
+		sb.append(printModel());
 		int correct = 0;
+                
 		for(int i = 0; i<dataTable.size(); i++) {
 			String result = test(dataTable.get(i));
 			if(result.equals(dataTable.get(i).getAttributes().get(nAttr-1))) {
 				correct++;
 			}
 		}
-		System.out.println("--- Full Training Set ---\n");
-		System.out.println("Correct Answer\t: " + correct);
-		System.out.println("Wrong Answer  \t: " + (dataTable.size()-correct));
-		System.out.println("Total         \t: " + dataTable.size());
-		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size())+" %");
+		sb.append("--- Full Training Set ---\n");
+		sb.append("Correct Answer\t: ").append(correct).append("\n");
+		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
+		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
+		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %").append("\n");
+                
+                return sb.toString();
 	}
         
-	public void ten_fold(Pair dataset) {
+	public String ten_fold(Pair dataset) {
+                StringBuilder sb = new StringBuilder();
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
 		init(dataset);
 		count(dataset, +1);
-		printModel();
+		sb.append(printModel());
 		int sizeMin = dataTable.size()/10, mod = dataTable.size() % 10;
 		int offset = 0;
-		int correct = 0;  
+		int correct = 0;
+                
 		for(int i = 0; i<10; i++) {
 			ArrayList datas = new ArrayList();
 			int to = offset+sizeMin;
@@ -156,29 +162,41 @@ public class NaiveBayes {
 			count(datatest, +1);
 			offset = to;
 		}
-		System.out.println("--- Cross Validation 10-fold ---\n");
-		System.out.println("Correct Answer\t: " + correct);
-		System.out.println("Wrong Answer  \t: " + (dataTable.size()-correct));
-		System.out.println("Total         \t: " + dataTable.size());
-		System.out.println("Accuracy      \t: " + (correct*100.0/dataTable.size()) + " %");
+		sb.append("--- Cross Validation 10-fold ---\n");
+		sb.append("Correct Answer\t: ").append(correct).append("\n");
+		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
+		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
+		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %").append("\n");
+                
+                return sb.toString();
 	}
         
-	public void printModel() {
-		System.out.println("--- Classifier Model (Full Training Set) ---\n");
+	public String printModel() {
+                StringBuilder sb = new StringBuilder();
+                
+		sb.append("--- Classifier Model (Full Training Set) ---\n\n");
 		for(int i = 0; i < nAttr-1; i++) {
-			System.out.println(nameAttr[i] + " :");
+			sb.append(nameAttr[i]).append(" :\n");
 			for(int j = 0; j < domainAttr[i].size(); j++) {
-				System.out.print(" " + domainAttr[i].get(j)+ "\t= ");
+				sb.append(" ").append(domainAttr[i].get(j)).append("\t= ");
 				for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
-					System.out.print(domainAttr[nAttr-1].get(k) + "(" + countTable[i].get(j).get(k) + ")\t");
+					sb.append(domainAttr[nAttr-1].get(k))
+                                                .append("(")
+                                                .append(countTable[i].get(j).get(k))
+                                                .append(")\t");
 				}
-				System.out.println("");
+				sb.append("\n");
 			}
-			System.out.print(" TOTAL\t= ");
+			sb.append(" TOTAL\t= ");
 			for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
-				System.out.print(domainAttr[nAttr-1].get(k) + "(" + sumTable[i].get(k) + ")\t");
+				sb.append(domainAttr[nAttr-1].get(k))
+                                        .append("(")
+                                        .append(sumTable[i].get(k))
+                                        .append(")\t\n");
 			}
-			System.out.println("\n");
+			sb.append("\n");
 		}
+                
+                return sb.toString();
 	}
 }
