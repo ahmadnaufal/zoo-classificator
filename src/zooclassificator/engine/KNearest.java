@@ -27,6 +27,7 @@ public class KNearest {
         comparator = new KNNComparator();
         sortedData = new PriorityQueue(n, comparator);
     }
+    
     public String Classificate(Pair dataset, Data data){
         dummy = data;
         for(Data eachdata : dataset.getDataSet()){
@@ -78,6 +79,7 @@ public class KNearest {
             return 0;
         }
     }
+    
     private int theValue(Data b, Data a){
         int value = 0;
         int size = b.getAttributes().size()-1;
@@ -90,6 +92,7 @@ public class KNearest {
         }
         return value;
     }
+    
     public String FullTraining(Pair datasett){
         StringBuilder sb = new StringBuilder();
         double rightValue = 0;
@@ -105,11 +108,12 @@ public class KNearest {
         sb.append("--- Full Training ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
 	sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
-	sb.append("Total         \t: ").append(datasett.getDataSet().size()).append("\n");
-	sb.append("Accuracy      \t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %").append("\n");
+	sb.append("Total         \t\t: ").append(datasett.getDataSet().size()).append("\n");
+	sb.append("Accuracy      \t\t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %\n");
         
         return sb.toString();
     }
+    
     public String tenFold(Pair dataset){
         StringBuilder sb = new StringBuilder();
         double rightValue = 0;
@@ -153,8 +157,8 @@ public class KNearest {
         sb.append("--- Cross Validation 10-fold ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
 	sb.append("Wrong Answer  \t: ").append(dataset.getDataSet().size()-rightValue).append("\n");
-	sb.append("Total         \t: ").append(dataset.getDataSet().size()).append("\n");
-	sb.append("Accuracy      \t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %").append("\n");
+	sb.append("Total         \t\t: ").append(dataset.getDataSet().size()).append("\n");
+	sb.append("Accuracy      \t\t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %\n");
         
         return sb.toString();
     }

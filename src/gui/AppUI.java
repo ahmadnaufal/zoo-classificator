@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.text.DefaultEditorKit;
 import zooclassificator.engine.KNearest;
 import zooclassificator.engine.NaiveBayes;
@@ -53,8 +55,25 @@ public class AppUI extends javax.swing.JFrame {
         textK = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         textResult = new javax.swing.JTextPane();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         dataFileChooser.setDialogTitle("Select a Dataset");
+        dataFileChooser.setFileFilter(new FileFilter() {
+
+            public String getDescription() {
+                return "Dataset Documents (txt, arff)";
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    return f.getName().toLowerCase().endsWith(".txt") || f.getName().toLowerCase().endsWith(".arff");
+                }
+            }
+        });
 
         buttonGroupAlgorithm.add(radioAlgorithm1);
         buttonGroupAlgorithm.add(radioAlgorithm2);
@@ -63,8 +82,11 @@ public class AppUI extends javax.swing.JFrame {
         buttonGroupTrain.add(radioTrain2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ZooHoo");
+        setResizable(false);
 
         textFilePath.setEditable(false);
+        textFilePath.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         textFilePath.setText("Browse a file...");
         textFilePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,40 +130,55 @@ public class AppUI extends javax.swing.JFrame {
 
         textK.setText("1");
 
+        textResult.setEditable(false);
+        textResult.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
         jScrollPane1.setViewportView(textResult);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Classification Algorithm");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Training Method");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioAlgorithm2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(radioAlgorithm1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textK, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(textFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(textK, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(radioAlgorithm2)
+                                    .addComponent(jLabel1))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioTrain1)
-                                    .addComponent(radioTrain2))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(buttonBrowse)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))))
+                                .addComponent(buttonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioTrain1)
+                                    .addComponent(radioTrain2)
+                                    .addComponent(jLabel2))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator2)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +188,11 @@ public class AppUI extends javax.swing.JFrame {
                     .addComponent(buttonBrowse)
                     .addComponent(buttonSubmit)
                     .addComponent(textFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioAlgorithm1)
                     .addComponent(radioTrain1)
@@ -160,44 +201,52 @@ public class AppUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioAlgorithm2)
                     .addComponent(radioTrain2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(62, 62, 62)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(373, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubmitActionPerformed
-        try {
-            // TODO add your handling code here:
-//      textResult.read(new FileReader(file.getAbsolutePath()), null);
-            String text;
-            Pair P = Pair.readDataSet(file.getAbsolutePath());
-            if (radioAlgorithm2.isSelected()) {
-                NaiveBayes nb = new NaiveBayes();
-                if (radioTrain2.isSelected())
-                    text = nb.ten_fold(P);
-                else
-                    text = nb.fulltraining(P);
-            } else if (radioAlgorithm1.isSelected()) {
-                int k = Integer.parseInt(textK.getText());
-                KNearest knn = new KNearest(k);
-                if (radioTrain2.isSelected())
-                    text = knn.tenFold(P);
-                else
-                    text = knn.FullTraining(P);
-            } else {
-                text = "Oops error occurred..";
+        if (!textFilePath.getText().equals("Browse a file...")) {
+            try {
+                // TODO add your handling code here:
+                String text;
+                Pair P = Pair.readDataSet(file.getAbsolutePath());
+                if (radioAlgorithm2.isSelected()) {
+                    NaiveBayes nb = new NaiveBayes();
+                    if (radioTrain2.isSelected())
+                        text = nb.ten_fold(P);
+                    else
+                        text = nb.fulltraining(P);
+                } else if (radioAlgorithm1.isSelected()) {
+                    int k = Integer.parseInt(textK.getText());
+                    KNearest knn = new KNearest(k);
+                    if (radioTrain2.isSelected())
+                        text = knn.tenFold(P);
+                    else
+                        text = knn.FullTraining(P);
+                } else {
+                    text = "Oops error occurred..";
+                }
+
+                textResult.setText(text);
+            } catch (IOException ex) {
+                Logger.getLogger(AppUI.class.getName()).log(Level.SEVERE, null, ex);
+                textResult.setText("I/O Error...");
             }
-            
-            textResult.setText(text);
-        } catch (IOException ex) {
-            Logger.getLogger(AppUI.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            textResult.setText("Please select a dataset!");
         }
-            
     }//GEN-LAST:event_buttonSubmitActionPerformed
 
     private void textFilePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFilePathActionPerformed
@@ -208,7 +257,7 @@ public class AppUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         int ret = dataFileChooser.showOpenDialog(this);
         
-        if (ret == dataFileChooser.APPROVE_OPTION) {
+        if (ret == JFileChooser.APPROVE_OPTION) {
             file = dataFileChooser.getSelectedFile();
             // What to do with the file, e.g. display it in a TextArea
             textFilePath.setText(file.getAbsolutePath());
@@ -269,8 +318,11 @@ public class AppUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupTrain;
     private javax.swing.JButton buttonSubmit;
     private javax.swing.JFileChooser dataFileChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JRadioButton radioAlgorithm1;
     private javax.swing.JRadioButton radioAlgorithm2;
     private javax.swing.JRadioButton radioTrain1;

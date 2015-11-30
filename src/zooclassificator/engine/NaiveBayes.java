@@ -120,11 +120,11 @@ public class NaiveBayes {
 				correct++;
 			}
 		}
-		sb.append("--- Full Training Set ---").append(System.lineSeparator());
-		sb.append("Correct Answer\t: ").append(correct).append(System.lineSeparator());
-		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append(System.lineSeparator());
-		sb.append("Total         \t: ").append(dataTable.size()).append(System.lineSeparator());
-		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %").append(System.lineSeparator());
+		sb.append("--- Full Training Set ---\n");
+		sb.append("Correct Answer\t: ").append(correct).append("\n");
+		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
+		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
+		sb.append("Accuracy      \t\t: ").append(correct*100.0/dataTable.size()).append(" %\n");
                 
                 return sb.toString();
 	}
@@ -162,11 +162,11 @@ public class NaiveBayes {
 			count(datatest, +1);
 			offset = to;
 		}
-		sb.append("--- Cross Validation 10-fold ---").append(System.lineSeparator());
-		sb.append("Correct Answer\t: ").append(correct).append(System.lineSeparator());
-		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append(System.lineSeparator());
-		sb.append("Total         \t: ").append(dataTable.size()).append(System.lineSeparator());
-		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %").append(System.lineSeparator());
+		sb.append("--- Cross Validation 10-fold ---\n");
+		sb.append("Correct Answer\t: ").append(correct).append("\n");
+		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
+		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
+		sb.append("Accuracy      \t\t: ").append(correct*100.0/dataTable.size()).append(" %\n");
                 
                 return sb.toString();
 	}
@@ -174,11 +174,9 @@ public class NaiveBayes {
 	public String printModel() {
                 StringBuilder sb = new StringBuilder();
                 
-		sb.append("--- Classifier Model (Full Training Set) ---");
-                sb.append(System.lineSeparator());
-                sb.append(System.lineSeparator());
+		sb.append("--- Classifier Model (Full Training Set) ---\n\n");
 		for(int i = 0; i < nAttr-1; i++) {
-			sb.append(nameAttr[i]).append(" :").append(System.lineSeparator());
+			sb.append(nameAttr[i]).append(" :\n");
 			for(int j = 0; j < domainAttr[i].size(); j++) {
 				sb.append(" ").append(domainAttr[i].get(j)).append("\t= ");
 				for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
@@ -187,17 +185,16 @@ public class NaiveBayes {
                                                 .append(countTable[i].get(j).get(k))
                                                 .append(")\t");
 				}
-				sb.append(System.lineSeparator());
+				sb.append("\n");
 			}
 			sb.append(" TOTAL\t= ");
 			for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
 				sb.append(domainAttr[nAttr-1].get(k))
                                         .append("(")
                                         .append(sumTable[i].get(k))
-                                        .append(")\t")
-                                        .append(System.lineSeparator());
+                                        .append(")\t");
 			}
-			sb.append(System.lineSeparator());
+			sb.append("\n\n");
 		}
                 
                 return sb.toString();
