@@ -52,7 +52,7 @@ public class AppUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         textK = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textResult = new javax.swing.JTextField();
+        textResult = new javax.swing.JTextPane();
 
         dataFileChooser.setDialogTitle("Select a Dataset");
 
@@ -108,12 +108,6 @@ public class AppUI extends javax.swing.JFrame {
 
         textK.setText("1");
 
-        textResult.setEditable(false);
-        textResult.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textResultActionPerformed(evt);
-            }
-        });
         jScrollPane1.setViewportView(textResult);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,10 +223,6 @@ public class AppUI extends javax.swing.JFrame {
         textK.setEditable(true);
     }//GEN-LAST:event_radioAlgorithm1ActionPerformed
 
-    private void textResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textResultActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textResultActionPerformed
-
     private void radioAlgorithm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAlgorithm2ActionPerformed
         // TODO add your handling code here:
         textK.setEditable(false);
@@ -287,6 +277,6 @@ public class AppUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioTrain2;
     private javax.swing.JTextField textFilePath;
     private javax.swing.JTextField textK;
-    private javax.swing.JTextField textResult;
+    private javax.swing.JTextPane textResult;
     // End of variables declaration//GEN-END:variables
 }
