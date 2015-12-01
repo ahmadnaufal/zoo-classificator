@@ -1,3 +1,26 @@
+@relation zoo
+
+@attribute name {aardvark, antelope, bass, bear, boar, buffalo, calf, carp, catfish, cavy, cheetah, chicken, chub, clam, crab, crayfish, crow, deer, dogfish, dolphin, dove, duck, elephant, flamingo, flea, frog, frog, fruitbat, giraffe, girl, gnat, goat, gorilla, gull, haddock, hamster, hare, hawk, herring, honeybee, housefly, kiwi, ladybird, lark, leopard, lion, lobster, lynx, mink, mole, mongoose, moth, newt, octopus, opossum, oryx, ostrich, parakeet, penguin, pheasant, pike, piranha, pitviper, platypus, polecat, pony, porpoise, puma, pussycat, raccoon, reindeer, rhea, scorpion, seahorse, seal, sealion, seasnake, seawasp, skimmer, skua, slowworm, slug, sole, sparrow, squirrel, starfish, stingray, swan, termite, toad, tortoise, tuatara, tuna, vampire, vole, vulture, wallaby, wasp, wolf, worm, wren}
+@attribute hair {0, 1}
+@attribute feathers {0, 1}
+@attribute eggs {0, 1}
+@attribute milk {0, 1}
+@attribute airborne {0, 1}
+@attribute aquatic {0, 1}
+@attribute predator {0, 1}
+@attribute toothed {0, 1}
+@attribute backbone {0, 1}
+@attribute breathes {0, 1}
+@attribute venomous {0, 1}
+@attribute fins {0, 1}
+@attribute legs {0, 2, 4, 5, 6, 8}
+@attribute tail {0, 1}
+@attribute domestic {0, 1}
+@attribute catsize {0, 1}
+@attribute type {1, 2, 3, 4, 5, 6, 7}
+
+
+@data
 aardvark,1,0,0,1,0,0,1,1,1,1,0,0,4,0,0,1,1
 antelope,1,0,0,1,0,0,0,1,1,1,0,0,4,1,0,1,1
 bass,0,0,1,0,0,1,1,1,1,0,0,1,0,1,0,0,4

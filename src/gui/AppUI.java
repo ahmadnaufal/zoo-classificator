@@ -217,6 +217,7 @@ public class AppUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubmitActionPerformed
+        textResult.setText("Waiting...");
         if (!textFilePath.getText().equals("Browse a file...")) {
             try {
                 // TODO add your handling code here:

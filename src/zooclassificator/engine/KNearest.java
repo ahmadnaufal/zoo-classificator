@@ -104,7 +104,6 @@ public class KNearest {
                 rightValue = rightValue + 1;
             }
         }
-        
         sb.append("--- Full Training ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
 	sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
