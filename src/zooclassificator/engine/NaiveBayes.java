@@ -120,12 +120,14 @@ public class NaiveBayes {
 	}
         
 	public String fulltraining(Pair dataset) {
-                StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
 		init(dataset);
 		count(dataset, +1);
 		sb.append(printModel());
+		sb.append(printProbabilisticModel());
 		int correct = 0;
                 
 		for(int i = 0; i<dataTable.size(); i++) {
@@ -138,19 +140,21 @@ public class NaiveBayes {
 		sb.append("\n--- Full Training Set ---\n");
 		sb.append("Correct Answer\t: ").append(correct).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
-		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
+		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
 		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %\n");
                 
                 return sb.toString();
 	}
         
 	public String ten_fold(Pair dataset) {
-                StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        
 		ArrayList< Data > dataTable = dataset.getDataSet();
 		reset();
 		init(dataset);
 		count(dataset, +1);
 		sb.append(printModel());
+		sb.append(printProbabilisticModel());
 		int sizeMin = dataTable.size()/10, mod = dataTable.size() % 10;
 		int offset = 0;
 		int correct = 0;
@@ -181,57 +185,81 @@ public class NaiveBayes {
 		sb.append("\n--- Cross Validation 10-fold ---\n");
 		sb.append("Correct Answer\t: ").append(correct).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
-		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
+		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
 		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %\n");
         
 		return sb.toString();
 	}
         
-	public String printModel() {
-                StringBuilder sb = new StringBuilder();
+	public String printProbabilisticModel() {
+        StringBuilder sb = new StringBuilder();
                 
-		sb.append("--- Classifier Model (Full Training Set) ---\n\n");
+		sb.append("--- Classifier Probabilistic Model (Full Training Set)---\n\n");
+		sb.append(String.format(" %10s : ", nameAttr[nAttr-1]));
+		for(int i = 0; i < domainAttr[nAttr-1].size(); i++)
+			sb.append(String.format( " %10s", domainAttr[nAttr-1].get(i)));
+		sb.append("\n");
+		int cnt = 11*domainAttr[nAttr-1].size() + 14;
+		for(int i = 0; i<cnt; i++)
+			sb.append("-");
+		sb.append("\n");
 		for(int i = 0; i < nAttr-1; i++) {
 			sb.append(nameAttr[i]).append(" :\n");
 			for(int j = 0; j < domainAttr[i].size(); j++) {
-				sb.append(" ").append(domainAttr[i].get(j)).append("\t= ");
+				sb.append(" ").append(String.format("%10s", domainAttr[i].get(j))).append(" = ");
 				for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
-					sb.append(domainAttr[nAttr-1].get(k))
-                                                .append("(")
-                                                .append(countTable[i].get(j).get(k))
-                                                .append(")\t");
+					sb.append(String.format(" %10.7s", (double)countTable[i].get(j).get(k)/sumTable[i].get(k)));
 				}
 				sb.append("\n");
 			}
-			sb.append(" TOTAL\t= ");
-			for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
-				sb.append(domainAttr[nAttr-1].get(k))
-                                        .append("(")
-                                        .append(sumTable[i].get(k))
-                                        .append(")\t");
-			}
-			sb.append("\n\n");
+			sb.append("\n");
 		}
                 
-                return sb.toString();
+        return sb.toString();
 	}
 	public String printConfusion() {
         StringBuilder sb = new StringBuilder();
-        char c = 'a';
 		sb.append("--- Confusion Matrix ---\n\n");
 		for(int i = 0; i < confusion.size(); i++) {
-			sb.append(String.format("%10s ", c));
-			c++;
+			sb.append(String.format("%10s ", "attr" + (i+1)));
 		}
 		sb.append("\n");
-		c = 'a';
 		for(int i = 0; i < confusion.size(); i++) {
 			for(int j = 0; j<confusion.get(i).size(); j++) {
 				sb.append(String.format("%10s ", confusion.get(i).get(j)));
 			}
-			sb.append(" | ").append(c).append(" = ").append(domainAttr[nAttr-1].get(i) + "\n");
-			c++;
+			sb.append(" | ").append("attr"+(i+1)).append(" = ").append(domainAttr[nAttr-1].get(i) + "\n");
 		}
 		return sb.toString();
+	}
+	public String printModel() {
+        StringBuilder sb = new StringBuilder();
+                
+		sb.append("--- Classifier Model (Full Training Set) ---\n\n");
+		sb.append(String.format(" %10s : ", nameAttr[nAttr-1]));
+		for(int i = 0; i < domainAttr[nAttr-1].size(); i++)
+			sb.append(String.format( " %10s", domainAttr[nAttr-1].get(i)));
+		sb.append("\n");
+		int cnt = 11*domainAttr[nAttr-1].size() + 14;
+		for(int i = 0; i<cnt; i++)
+			sb.append("-");
+		sb.append("\n");
+		for(int i = 0; i < nAttr-1; i++) {
+			sb.append(nameAttr[i]).append(" :\n");
+			for(int j = 0; j < domainAttr[i].size(); j++) {
+				sb.append(" ").append(String.format("%10s", domainAttr[i].get(j))).append(" = ");
+				for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
+					sb.append(String.format(" %10s", countTable[i].get(j).get(k)));
+				}
+				sb.append("\n");
+			}
+			sb.append(" TOTAL      = ");
+			for(int k = 0; k<domainAttr[nAttr-1].size(); k++) {
+				sb.append(String.format(" %10s", sumTable[i].get(k)));
+			}
+			sb.append("\n\n");
+		}
+                
+        return sb.toString();
 	}
 }

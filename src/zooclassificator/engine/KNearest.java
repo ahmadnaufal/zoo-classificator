@@ -129,8 +129,8 @@ public class KNearest {
         sb.append("--- Full Training ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
 		sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
-		sb.append("Total         \t\t: ").append(datasett.getDataSet().size()).append("\n");
-		sb.append("Accuracy      \t\t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %\n");
+		sb.append("Total         \t: ").append(datasett.getDataSet().size()).append("\n");
+		sb.append("Accuracy      \t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %\n");
         return sb.toString();
     }
     
@@ -197,8 +197,8 @@ public class KNearest {
         sb.append("\n--- Cross Validation 10-fold ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataset.getDataSet().size()-rightValue).append("\n");
-		sb.append("Total         \t\t: ").append(dataset.getDataSet().size()).append("\n");
-		sb.append("Accuracy      \t\t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %\n");
+		sb.append("Total         \t: ").append(dataset.getDataSet().size()).append("\n");
+		sb.append("Accuracy      \t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %\n");
         
         return sb.toString();
     }
@@ -217,5 +217,4 @@ public class KNearest {
 		}
 		return sb.toString();
 	}
-    
 }

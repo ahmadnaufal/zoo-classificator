@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.DefaultEditorKit;
+import java.awt.Font;
 import zooclassificator.engine.KNearest;
 import zooclassificator.engine.NaiveBayes;
 import zooclassificator.model.Pair;
@@ -131,7 +132,7 @@ public class AppUI extends javax.swing.JFrame {
         textK.setText("1");
 
         textResult.setEditable(false);
-        textResult.setFont(new java.awt.Font("Segoe UI Symbol", 0, 11)); // NOI18N
+        textResult.setFont(new java.awt.Font(Font.MONOSPACED, Font.PLAIN, 11)); // NOI18N
         jScrollPane1.setViewportView(textResult);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
