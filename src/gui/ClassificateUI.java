@@ -6,6 +6,8 @@
 package gui;
 
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 
 /**
@@ -15,11 +17,27 @@ import javax.swing.JFileChooser;
 public class ClassificateUI extends javax.swing.JFrame {
 
     File file;
+    ArrayList<JCheckBox> checkBox;
     /**
      * Creates new form ClassificateUI
      */
     public ClassificateUI() {
         initComponents();
+        checkBox.add(properties1);
+        checkBox.add(properties2);
+        checkBox.add(properties3);
+        checkBox.add(properties4);
+        checkBox.add(properties5);
+        checkBox.add(properties6);
+        checkBox.add(properties7);
+        checkBox.add(properties8);
+        checkBox.add(properties9);
+        checkBox.add(properties10);
+        checkBox.add(properties11);
+        checkBox.add(properties12);
+        checkBox.add(properties14);
+        checkBox.add(properties15);
+        checkBox.add(properties16);
     }
 
     /**
