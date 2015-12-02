@@ -6,9 +6,14 @@
 package gui;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
+import zooclassificator.model.Data;
+import zooclassificator.model.Pair;
 
 /**
  *
@@ -23,6 +28,7 @@ public class ClassificateUI extends javax.swing.JFrame {
      */
     public ClassificateUI() {
         initComponents();
+        checkBox = new ArrayList<>();
         checkBox.add(properties1);
         checkBox.add(properties2);
         checkBox.add(properties3);
@@ -318,6 +324,43 @@ public class ClassificateUI extends javax.swing.JFrame {
 
     private void buttonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubmitActionPerformed
         
+        if (!textFilePath.getText().equals("Select the zoo.data.arff file path...")) {
+            labelResult.setText("Waiting...");
+            try {
+                Pair P = Pair.readDataSet(file.getAbsolutePath());
+                //System.out.println(P.getAttrLib().size());
+                ArrayList<String> Data = new ArrayList<>();
+                
+                int j=0; //nilai iterasi untuk checkbox
+                
+                //Loop ini akan melakukan inisialisasi Data yang akan dijadikan test mulai dari atribut 1-18
+                for(int i=0; i<P.getAttrLib().size()-1; i++){
+                    
+                    //Bagian kondisi ini untuk memisahkan pengambilan data dari textfield, combo, atau checkbox
+                    if(i==0){ //Khusus data pertama harus berasal dari textfield
+                        
+                        Data.add(jTextField1.getText());
+                        
+                    }else if(i==13){ //Khusus data ke 14 berasal dari combo
+                        
+                        Data.add(comboProperties13.getSelectedItem().toString());
+                        
+                    }else{ //Data checkbox akan di iterasi disini
+                        
+                        if(checkBox.get(j++).isSelected()){
+                            Data.add("1");
+                        }else{
+                            Data.add("0");
+                        }
+                        
+                    }
+                } //akhir inisialisasi. data dari form berhasil diinput ke struktur data
+            } catch (IOException ex) {
+                Logger.getLogger(ClassificateUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            labelResult.setText("Please input your arf file");
+        }
     }//GEN-LAST:event_buttonSubmitActionPerformed
 
     /**

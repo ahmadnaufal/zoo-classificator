@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/zoo-classificator/src/gui/AppUI.java</file>
-            <file>file:/D:/zoo-classificator/src/zooclassificator/engine/NaiveBayes.java</file>
-            <file>file:/D:/zoo-classificator/src/zooclassificator/engine/KNearest.java</file>
+            <file>file:/Users/fauzanrifqy/Documents/Repo/zoo-classificator/src/zooclassificator/model/Pair.java</file>
+            <file>file:/Users/fauzanrifqy/Documents/Repo/zoo-classificator/src/gui/AppUI.form</file>
+            <file>file:/Users/fauzanrifqy/Documents/Repo/zoo-classificator/src/zooclassificator/engine/KNearest.java</file>
+            <file>file:/Users/fauzanrifqy/Documents/Repo/zoo-classificator/src/gui/AppUI.java</file>
         </group>
     </open-files>
 </project-private>
