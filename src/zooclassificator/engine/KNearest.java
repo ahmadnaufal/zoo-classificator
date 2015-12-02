@@ -20,12 +20,16 @@ public class KNearest {
     private PriorityQueue<Data> sortedData;
     private Comparator<Data> comparator;
     private Data dummy;
+    private ArrayList< String > domainClass;
+    private ArrayList< ArrayList<Integer > > confusion;
     private int n;
     
     public KNearest(int n){
         this.n = n;
         comparator = new KNNComparator();
         sortedData = new PriorityQueue(n, comparator);
+        domainClass = new ArrayList();
+        confusion  = new ArrayList();
     }
     
     public String Classificate(Pair dataset, Data data){
@@ -94,26 +98,52 @@ public class KNearest {
     }
     
     public String FullTraining(Pair datasett){
+    	ArrayList<Data> attr = datasett.getAttrLib();
+    	ArrayList<String> classAttr = attr.get(attr.size()-1).getAttributes();
+    	confusion = new ArrayList();
+    	for(int i = 0; i<classAttr.size(); i++) {
+    		domainClass.add(classAttr.get(i));
+    		confusion.add(new ArrayList());
+    		for(int j = 0; j<classAttr.size(); j++)
+    			confusion.get(i).add(0);
+    	}
         StringBuilder sb = new StringBuilder();
         double rightValue = 0;
         for(int i = 0; i < datasett.getDataSet().size(); i++){
             Pair dataset = datasett;
             Data data = dataset.getDataSet().get(i);
             int size = data.getAttributes().size();
-            if(Classificate(dataset, data).equals(data.getAttributes().get(size-1))){
+            String result = Classificate(dataset, data);
+            if(result.equals(data.getAttributes().get(size-1))){
                 rightValue = rightValue + 1;
             }
+            // Update Confusion Matrix
+            int id = domainClass.indexOf(result);
+            int ix = domainClass.indexOf(data.getAttributes().get(size-1));
+            if(id >= 0 && ix >= 0) {
+            	int before = confusion.get(ix).get(id);
+            	confusion.get(ix).set(id, before + 1);
+            }
         }
+        sb.append(printConfusion());
         sb.append("--- Full Training ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
-	sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
-	sb.append("Total         \t\t: ").append(datasett.getDataSet().size()).append("\n");
-	sb.append("Accuracy      \t\t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %\n");
-        
+		sb.append("Wrong Answer  \t: ").append(datasett.getDataSet().size()-rightValue).append("\n");
+		sb.append("Total         \t\t: ").append(datasett.getDataSet().size()).append("\n");
+		sb.append("Accuracy      \t\t: ").append(rightValue*100.0/datasett.getDataSet().size()).append(" %\n");
         return sb.toString();
     }
     
     public String tenFold(Pair dataset){
+    	ArrayList<Data> attr = dataset.getAttrLib();
+    	ArrayList<String> classAttr = attr.get(attr.size()-1).getAttributes();
+    	confusion = new ArrayList();
+    	for(int i = 0; i<classAttr.size(); i++) {
+    		domainClass.add(classAttr.get(i));
+    		confusion.add(new ArrayList());
+    		for(int j = 0; j<classAttr.size(); j++)
+    			confusion.get(i).add(0);
+    	}
         StringBuilder sb = new StringBuilder();
         double rightValue = 0;
         int dataSize = dataset.getDataSet().size();
@@ -148,18 +178,44 @@ public class KNearest {
             }
             
             int size = data.getAttributes().size();
-            if(Classificate(temp, data).equals(data.getAttributes().get(size-1))){
+            
+            String result = Classificate(temp, data);
+            if(result.equals(data.getAttributes().get(size-1))){
                 rightValue = rightValue + 1;
             }
+            
+            // Update Confusion Matrix
+            int id = domainClass.indexOf(result);
+            int ix = domainClass.indexOf(data.getAttributes().get(size-1));
+            if(id >= 0 && ix >= 0) {
+            	int before = confusion.get(ix).get(id);
+            	confusion.get(ix).set(id, before + 1);
+            }
+            
         }
-        
-        sb.append("--- Cross Validation 10-fold ---\n");
+        sb.append(printConfusion());        
+        sb.append("\n--- Cross Validation 10-fold ---\n");
         sb.append("Correct Answer\t: ").append(rightValue).append("\n");
-	sb.append("Wrong Answer  \t: ").append(dataset.getDataSet().size()-rightValue).append("\n");
-	sb.append("Total         \t\t: ").append(dataset.getDataSet().size()).append("\n");
-	sb.append("Accuracy      \t\t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %\n");
+		sb.append("Wrong Answer  \t: ").append(dataset.getDataSet().size()-rightValue).append("\n");
+		sb.append("Total         \t\t: ").append(dataset.getDataSet().size()).append("\n");
+		sb.append("Accuracy      \t\t: ").append(rightValue*100.0/dataset.getDataSet().size()).append(" %\n");
         
         return sb.toString();
     }
+    public String printConfusion() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- Confusion Matrix ---\n\n");
+		for(int i = 0; i < confusion.size(); i++) {
+			sb.append(String.format("%10s ", "attr"+(i+1)));
+		}
+		sb.append("\n");
+		for(int i = 0; i < confusion.size(); i++) {
+			for(int j = 0; j<confusion.get(i).size(); j++) {
+				sb.append(String.format("%10s ", confusion.get(i).get(j)));
+			}
+			sb.append(" | ").append("attr"+(i+1)).append(" = ").append(domainClass.get(i) + "\n");
+		}
+		return sb.toString();
+	}
     
 }

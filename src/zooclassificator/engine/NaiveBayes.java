@@ -181,10 +181,10 @@ public class NaiveBayes {
 		sb.append("\n--- Cross Validation 10-fold ---\n");
 		sb.append("Correct Answer\t: ").append(correct).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
-		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
+		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
 		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %\n");
         
-                return sb.toString();
+		return sb.toString();
 	}
         
 	public String printModel() {
