@@ -17,7 +17,7 @@ import javax.swing.JFileChooser;
 public class ClassificateUI extends javax.swing.JFrame {
 
     File file;
-    ArrayList<JCheckBox> checkBox;
+    ArrayList<JCheckBox> checkBox = new ArrayList<>();
     /**
      * Creates new form ClassificateUI
      */
