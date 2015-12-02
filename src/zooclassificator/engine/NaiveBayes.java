@@ -15,6 +15,7 @@ public class NaiveBayes {
 	private ArrayList< Integer >[] sumTable;
 	private ArrayList <String>[] domainAttr;
 	private String[] nameAttr;
+	private ArrayList< ArrayList< Integer > > confusion; 
 	public NaiveBayes() {
 		reset();
 	}
@@ -24,6 +25,7 @@ public class NaiveBayes {
 		countTable = null;
 		sumTable = null;
 		domainAttr = null;
+		confusion = null;
 	}
 	
 	public void init(Pair dataset) {
@@ -56,6 +58,13 @@ public class NaiveBayes {
 			}
 			for(int j = 0; j<classAttr.size(); j++)
 				sumTable[i].add(0);
+		}
+		// Inisialisasi Confusion Matrix
+		confusion = new ArrayList<>();
+		for(int i = 0; i<domainAttr[nAttr-1].size(); i++) {
+			confusion.add(new ArrayList());
+			for(int j = 0; j<domainAttr[nAttr-1].size(); j++)
+				confusion.get(i).add(0);
 		}
 	}
 	
@@ -102,6 +111,11 @@ public class NaiveBayes {
 				id = i;
 			}
 		}
+		int ix = -1;
+		if(values.size() >= nAttr)
+			ix = domainAttr[nAttr-1].indexOf(values.get(nAttr-1));
+		if(ix >= 0)
+			confusion.get(ix).set(id, confusion.get(ix).get(id)+1);
 		return domainAttr[nAttr-1].get(id);
 	}
         
@@ -120,11 +134,12 @@ public class NaiveBayes {
 				correct++;
 			}
 		}
-		sb.append("--- Full Training Set ---\n");
+		sb.append(printConfusion());
+		sb.append("\n--- Full Training Set ---\n");
 		sb.append("Correct Answer\t: ").append(correct).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
 		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
-		sb.append("Accuracy      \t\t: ").append(correct*100.0/dataTable.size()).append(" %\n");
+		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %\n");
                 
                 return sb.toString();
 	}
@@ -162,12 +177,13 @@ public class NaiveBayes {
 			count(datatest, +1);
 			offset = to;
 		}
-		sb.append("--- Cross Validation 10-fold ---\n");
+		sb.append(printConfusion());
+		sb.append("\n--- Cross Validation 10-fold ---\n");
 		sb.append("Correct Answer\t: ").append(correct).append("\n");
 		sb.append("Wrong Answer  \t: ").append(dataTable.size()-correct).append("\n");
-		sb.append("Total         \t\t: ").append(dataTable.size()).append("\n");
-		sb.append("Accuracy      \t\t: ").append(correct*100.0/dataTable.size()).append(" %\n");
-                
+		sb.append("Total         \t: ").append(dataTable.size()).append("\n");
+		sb.append("Accuracy      \t: ").append(correct*100.0/dataTable.size()).append(" %\n");
+        
                 return sb.toString();
 	}
         
@@ -198,5 +214,24 @@ public class NaiveBayes {
 		}
                 
                 return sb.toString();
+	}
+	public String printConfusion() {
+        StringBuilder sb = new StringBuilder();
+        char c = 'a';
+		sb.append("--- Confusion Matrix ---\n\n");
+		for(int i = 0; i < confusion.size(); i++) {
+			sb.append(String.format("%10s ", c));
+			c++;
+		}
+		sb.append("\n");
+		c = 'a';
+		for(int i = 0; i < confusion.size(); i++) {
+			for(int j = 0; j<confusion.get(i).size(); j++) {
+				sb.append(String.format("%10s ", confusion.get(i).get(j)));
+			}
+			sb.append(" | ").append(c).append(" = ").append(domainAttr[nAttr-1].get(i) + "\n");
+			c++;
+		}
+		return sb.toString();
 	}
 }
