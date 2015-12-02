@@ -58,6 +58,8 @@ public class ClassificateUI extends javax.swing.JFrame {
     private void initComponents() {
 
         dataFileChooser = new javax.swing.JFileChooser();
+        jSeparator1 = new javax.swing.JSeparator();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         buttonSubmit = new javax.swing.JButton();
         labelResult = new javax.swing.JLabel();
@@ -82,8 +84,15 @@ public class ClassificateUI extends javax.swing.JFrame {
         properties15 = new javax.swing.JCheckBox();
         properties16 = new javax.swing.JCheckBox();
         comboProperties13 = new javax.swing.JComboBox<>();
+        radioAlgorithm1 = new javax.swing.JRadioButton();
+        radioAlgorithm2 = new javax.swing.JRadioButton();
+        textK = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         buttonBrowse = new javax.swing.JButton();
         textFilePath = new javax.swing.JTextField();
+
+        buttonGroup1.add(radioAlgorithm1);
+        buttonGroup1.add(radioAlgorithm2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +163,26 @@ public class ClassificateUI extends javax.swing.JFrame {
 
         comboProperties13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "5", "6", "8" }));
 
+        radioAlgorithm1.setText("k-Nearest Neighbor (kNN)");
+        radioAlgorithm1.setSelected(true);
+        radioAlgorithm1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioAlgorithm1ActionPerformed(evt);
+            }
+        });
+
+        radioAlgorithm2.setText("Naive-Bayes");
+        radioAlgorithm2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioAlgorithm2ActionPerformed(evt);
+            }
+        });
+
+        textK.setText("1");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Classification Algorithm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,54 +190,80 @@ public class ClassificateUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(properties1)
-                            .addComponent(properties2)
-                            .addComponent(properties3)
-                            .addComponent(properties14))
-                        .addGap(21, 21, 21)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(properties15)
-                                .addGap(18, 18, 18)
-                                .addComponent(properties16))
+                                .addComponent(radioAlgorithm1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textK, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(radioAlgorithm2)
+                            .addComponent(jLabel4))
+                        .addGap(61, 61, 61))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(properties4)
-                                    .addComponent(properties5)
-                                    .addComponent(properties6))
-                                .addGap(18, 18, 18)
+                                    .addComponent(properties1)
+                                    .addComponent(properties2)
+                                    .addComponent(properties3)
+                                    .addComponent(properties14))
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(properties7)
-                                    .addComponent(properties8)
-                                    .addComponent(properties9))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(properties12)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(properties15)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(properties16))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(properties10)
-                                            .addComponent(properties11))
+                                            .addComponent(properties4)
+                                            .addComponent(properties5)
+                                            .addComponent(properties6))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(properties7)
+                                            .addComponent(properties8)
+                                            .addComponent(properties9))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(properties12)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(comboProperties13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-                .addContainerGap())
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(properties10)
+                                                    .addComponent(properties11))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(10, 10, 10)
+                                                        .addComponent(comboProperties13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(93, 93, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radioAlgorithm1)
+                            .addComponent(textK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioAlgorithm2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,7 +290,7 @@ public class ClassificateUI extends javax.swing.JFrame {
                     .addComponent(properties14)
                     .addComponent(properties15)
                     .addComponent(properties16))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         buttonBrowse.setText("Browse..");
@@ -258,7 +313,10 @@ public class ClassificateUI extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(180, Short.MAX_VALUE)
+                .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -269,16 +327,15 @@ public class ClassificateUI extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(buttonBrowse)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(164, 164, 164)))
+                            .addComponent(buttonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(247, Short.MAX_VALUE)
+                .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(13, 13, 13)
@@ -288,9 +345,7 @@ public class ClassificateUI extends javax.swing.JFrame {
                         .addComponent(textFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(13, Short.MAX_VALUE)))
+                    .addContainerGap(82, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,59 +384,64 @@ public class ClassificateUI extends javax.swing.JFrame {
         if (!textFilePath.getText().equals("Select the zoo.data.arff file path...")) {
             labelResult.setText("Waiting...");
             try {
-                dataset = Pair.readDataSet(file.getAbsolutePath());
-                //System.out.println(P.getAttrLib().size());
+                Pair dataset = Pair.readDataSet(file.getAbsolutePath());
                 ArrayList<String> Data = new ArrayList<>();
                 
                 int j=0; //nilai iterasi untuk checkbox
                 
                 //Loop ini akan melakukan inisialisasi Data yang akan dijadikan test mulai dari atribut 1-18
-                for(int i=0; i<dataset.getAttrLib().size()-1; i++){
-                    
+                for (int i=0; i<dataset.getAttrLib().size()-1; i++){
                     //Bagian kondisi ini untuk memisahkan pengambilan data dari textfield, combo, atau checkbox
-                    if(i==0){ //Khusus data pertama harus berasal dari textfield
-                        
-                        Data.add(jTextField1.getText());
-                        
-                    }else if(i==13){ //Khusus data ke 14 berasal dari combo
-                        
+                    if (i==0) {
+                        //Khusus data pertama harus berasal dari textfield
+                        Data.add(jTextField1.getText());  
+                    } else if(i==13) {
+                        //Khusus data ke 14 berasal dari combo
                         Data.add(comboProperties13.getSelectedItem().toString());
-                        
-                    }else{ //Data checkbox akan di iterasi disini
-                        
-                        if(checkBox.get(j++).isSelected()){
+                    }else{ 
+                        //Data checkbox akan di iterasi disini
+                        if (checkBox.get(j++).isSelected()){
                             Data.add("1");
-                        }else{
+                        } else {
                             Data.add("0");
                         }
-                        
                     }
                 } //akhir inisialisasi. data dari form berhasil diinput ke struktur data
                 
-                /******** BENERIN MAAD ********/
                 //sesuaikan if else nya dengan pilihan knn/naivebayes
                 //Mulai pengklasifikasian
                 String result;
                 Data newData = new Data(Data);
-                if(true){ //Jika KNN
-                    int n= 5; //KNN untuk 5NN
+                if (radioAlgorithm1.isSelected()) { //Jika KNN
+                    int n = Integer.parseInt(textK.getText()); //KNN untuk 5NN
                     KNearest knn = new KNearest(n);
                     result = knn.Classificate(dataset, newData);
-                }else{ //Jika Naive Bayes
+                } else { //Jika Naive Bayes
                     NaiveBayes nb = new NaiveBayes();
                     nb.init(dataset);
                     result = nb.test(newData);
                 }
                 System.out.println(result);
+                labelResult.setText("Result: " + result);
                 
                 /********* SAMPAI SINI BENERIN **********/
             } catch (IOException ex) {
                 Logger.getLogger(ClassificateUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            labelResult.setText("Please input your arf file");
+            labelResult.setText("Please input your arff file");
         }
     }//GEN-LAST:event_buttonSubmitActionPerformed
+
+    private void radioAlgorithm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAlgorithm1ActionPerformed
+        // TODO add your handling code here:
+        textK.setEditable(true);
+    }//GEN-LAST:event_radioAlgorithm1ActionPerformed
+
+    private void radioAlgorithm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAlgorithm2ActionPerformed
+        // TODO add your handling code here:
+        textK.setEditable(false);
+    }//GEN-LAST:event_radioAlgorithm2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,16 +479,18 @@ public class ClassificateUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Pair dataset;
     private javax.swing.JButton buttonBrowse;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonSubmit;
     private javax.swing.JComboBox<String> comboProperties13;
     private javax.swing.JFileChooser dataFileChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelResult;
     private javax.swing.JCheckBox properties1;
@@ -446,6 +508,9 @@ public class ClassificateUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox properties7;
     private javax.swing.JCheckBox properties8;
     private javax.swing.JCheckBox properties9;
+    private javax.swing.JRadioButton radioAlgorithm1;
+    private javax.swing.JRadioButton radioAlgorithm2;
     private javax.swing.JTextField textFilePath;
+    private javax.swing.JTextField textK;
     // End of variables declaration//GEN-END:variables
 }
