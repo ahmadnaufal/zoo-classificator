@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
+import zooclassificator.engine.KNearest;
+import zooclassificator.engine.NaiveBayes;
 import zooclassificator.model.Data;
 import zooclassificator.model.Pair;
 
@@ -327,14 +329,14 @@ public class ClassificateUI extends javax.swing.JFrame {
         if (!textFilePath.getText().equals("Select the zoo.data.arff file path...")) {
             labelResult.setText("Waiting...");
             try {
-                Pair P = Pair.readDataSet(file.getAbsolutePath());
+                dataset = Pair.readDataSet(file.getAbsolutePath());
                 //System.out.println(P.getAttrLib().size());
                 ArrayList<String> Data = new ArrayList<>();
                 
                 int j=0; //nilai iterasi untuk checkbox
                 
                 //Loop ini akan melakukan inisialisasi Data yang akan dijadikan test mulai dari atribut 1-18
-                for(int i=0; i<P.getAttrLib().size()-1; i++){
+                for(int i=0; i<dataset.getAttrLib().size()-1; i++){
                     
                     //Bagian kondisi ini untuk memisahkan pengambilan data dari textfield, combo, atau checkbox
                     if(i==0){ //Khusus data pertama harus berasal dari textfield
@@ -355,6 +357,24 @@ public class ClassificateUI extends javax.swing.JFrame {
                         
                     }
                 } //akhir inisialisasi. data dari form berhasil diinput ke struktur data
+                
+                /******** BENERIN MAAD ********/
+                //sesuaikan if else nya dengan pilihan knn/naivebayes
+                //Mulai pengklasifikasian
+                String result;
+                Data newData = new Data(Data);
+                if(true){ //Jika KNN
+                    int n= 5; //KNN untuk 5NN
+                    KNearest knn = new KNearest(n);
+                    result = knn.Classificate(dataset, newData);
+                }else{ //Jika Naive Bayes
+                    NaiveBayes nb = new NaiveBayes();
+                    nb.init(dataset);
+                    result = nb.test(newData);
+                }
+                System.out.println(result);
+                
+                /********* SAMPAI SINI BENERIN **********/
             } catch (IOException ex) {
                 Logger.getLogger(ClassificateUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -399,6 +419,7 @@ public class ClassificateUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Pair dataset;
     private javax.swing.JButton buttonBrowse;
     private javax.swing.JButton buttonSubmit;
     private javax.swing.JComboBox<String> comboProperties13;
