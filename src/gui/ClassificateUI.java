@@ -38,24 +38,25 @@ public class ClassificateUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        properties1 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
+        properties2 = new javax.swing.JCheckBox();
+        properties3 = new javax.swing.JCheckBox();
+        properties4 = new javax.swing.JCheckBox();
+        properties5 = new javax.swing.JCheckBox();
+        properties6 = new javax.swing.JCheckBox();
+        properties7 = new javax.swing.JCheckBox();
+        properties8 = new javax.swing.JCheckBox();
+        properties9 = new javax.swing.JCheckBox();
+        properties10 = new javax.swing.JCheckBox();
+        properties11 = new javax.swing.JCheckBox();
+        properties12 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
+        properties14 = new javax.swing.JCheckBox();
+        properties15 = new javax.swing.JCheckBox();
+        properties16 = new javax.swing.JCheckBox();
+        comboProperties13 = new javax.swing.JComboBox<>();
+        labelResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,43 +83,45 @@ public class ClassificateUI extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jLabel1.setText("Your animal name!");
 
-        jCheckBox1.setText("Hairy");
+        properties1.setText("Hairy");
 
         jLabel2.setText("Animal Properties");
 
-        jCheckBox3.setText("Feathers");
+        properties2.setText("Feathers");
 
-        jCheckBox4.setText("Lays Eggs");
+        properties3.setText("Lays Eggs");
 
-        jCheckBox5.setText("Has Milk");
+        properties4.setText("Has Milk");
 
-        jCheckBox6.setText("It flies!");
+        properties5.setText("It flies!");
 
-        jCheckBox7.setText("It swims!");
+        properties6.setText("It swims!");
 
-        jCheckBox8.setText("Predator");
+        properties7.setText("Predator");
 
-        jCheckBox9.setText("Has Teeth");
+        properties8.setText("Has Teeth");
 
-        jCheckBox10.setText("Vertebrae");
+        properties9.setText("Vertebrae");
 
-        jCheckBox11.setText("Breathes");
+        properties10.setText("Breathes");
 
-        jCheckBox12.setText("Venomous");
+        properties11.setText("Venomous");
 
-        jCheckBox13.setText("Fins");
+        properties12.setText("Fins");
 
         jLabel3.setText("How many Legs?");
 
-        jTextField2.setText("0");
+        properties14.setText("Has Tail");
 
-        jCheckBox14.setText("Has Tail");
+        properties15.setText("Domestic");
 
-        jCheckBox15.setText("Domestic");
+        properties16.setText("Catsize?");
 
-        jCheckBox16.setText("Catsize?");
+        comboProperties13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "5", "6", "8" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,38 +135,40 @@ public class ClassificateUI extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox4)
-                            .addComponent(jCheckBox14))
+                            .addComponent(properties1)
+                            .addComponent(properties2)
+                            .addComponent(properties3)
+                            .addComponent(properties14))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox15)
+                                .addComponent(properties15)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox16))
+                                .addComponent(properties16))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox6)
-                                    .addComponent(jCheckBox7))
+                                    .addComponent(properties4)
+                                    .addComponent(properties5)
+                                    .addComponent(properties6))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox8)
-                                    .addComponent(jCheckBox9)
-                                    .addComponent(jCheckBox10))
+                                    .addComponent(properties7)
+                                    .addComponent(properties8)
+                                    .addComponent(properties9))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox13)
+                                    .addComponent(properties12)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox11)
-                                            .addComponent(jCheckBox12))
+                                            .addComponent(properties10)
+                                            .addComponent(properties11))
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField2))))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(comboProperties13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,31 +181,33 @@ public class ClassificateUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox8)
-                    .addComponent(jCheckBox11)
+                    .addComponent(properties1)
+                    .addComponent(properties4)
+                    .addComponent(properties7)
+                    .addComponent(properties10)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox9)
-                    .addComponent(jCheckBox12)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(properties2)
+                    .addComponent(properties5)
+                    .addComponent(properties8)
+                    .addComponent(properties11)
+                    .addComponent(comboProperties13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox10)
-                    .addComponent(jCheckBox13))
+                    .addComponent(properties3)
+                    .addComponent(properties6)
+                    .addComponent(properties9)
+                    .addComponent(properties12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox14)
-                    .addComponent(jCheckBox15)
-                    .addComponent(jCheckBox16))
+                    .addComponent(properties14)
+                    .addComponent(properties15)
+                    .addComponent(properties16))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        labelResult.setFont(new java.awt.Font("Lato", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,6 +224,10 @@ public class ClassificateUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +239,9 @@ public class ClassificateUI extends javax.swing.JFrame {
                     .addComponent(textFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,28 +306,29 @@ public class ClassificateUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBrowse;
     private javax.swing.JButton buttonSubmit;
+    private javax.swing.JComboBox<String> comboProperties13;
     private javax.swing.JFileChooser dataFileChooser;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel labelResult;
+    private javax.swing.JCheckBox properties1;
+    private javax.swing.JCheckBox properties10;
+    private javax.swing.JCheckBox properties11;
+    private javax.swing.JCheckBox properties12;
+    private javax.swing.JCheckBox properties14;
+    private javax.swing.JCheckBox properties15;
+    private javax.swing.JCheckBox properties16;
+    private javax.swing.JCheckBox properties2;
+    private javax.swing.JCheckBox properties3;
+    private javax.swing.JCheckBox properties4;
+    private javax.swing.JCheckBox properties5;
+    private javax.swing.JCheckBox properties6;
+    private javax.swing.JCheckBox properties7;
+    private javax.swing.JCheckBox properties8;
+    private javax.swing.JCheckBox properties9;
     private javax.swing.JTextField textFilePath;
     // End of variables declaration//GEN-END:variables
 }
