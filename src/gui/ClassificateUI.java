@@ -96,38 +96,53 @@ public class ClassificateUI extends javax.swing.JFrame {
         jLabel1.setText("Your animal name!");
 
         properties1.setText("Hairy");
+        properties1.setOpaque(false);
 
         jLabel2.setText("Animal Properties");
 
         properties2.setText("Feathers");
+        properties2.setOpaque(false);
 
         properties3.setText("Lays Eggs");
+        properties3.setOpaque(false);
 
         properties4.setText("Has Milk");
+        properties4.setOpaque(false);
 
         properties5.setText("It flies!");
+        properties5.setOpaque(false);
 
         properties6.setText("It swims!");
+        properties6.setOpaque(false);
 
         properties7.setText("Predator");
+        properties7.setOpaque(false);
 
         properties8.setText("Has Teeth");
+        properties8.setOpaque(false);
 
         properties9.setText("Vertebrae");
+        properties9.setOpaque(false);
 
         properties10.setText("Breathes");
+        properties10.setOpaque(false);
 
         properties11.setText("Venomous");
+        properties11.setOpaque(false);
 
         properties12.setText("Fins");
+        properties12.setOpaque(false);
 
         jLabel3.setText("How many Legs?");
 
         properties14.setText("Has Tail");
+        properties14.setOpaque(false);
 
         properties15.setText("Domestic");
+        properties15.setOpaque(false);
 
         properties16.setText("Catsize?");
+        properties16.setOpaque(false);
 
         comboProperties13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "5", "6", "8" }));
 

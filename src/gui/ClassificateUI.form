@@ -235,6 +235,7 @@
             <Component class="javax.swing.JCheckBox" name="properties1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hairy"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -245,56 +246,67 @@
             <Component class="javax.swing.JCheckBox" name="properties2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Feathers"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lays Eggs"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Has Milk"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="It flies!"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="It swims!"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Predator"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Has Teeth"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Vertebrae"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Breathes"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Venomous"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties12">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fins"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -305,16 +317,19 @@
             <Component class="javax.swing.JCheckBox" name="properties14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Has Tail"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties15">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Domestic"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="properties16">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Catsize?"/>
+                <Property name="opaque" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="comboProperties13">
